@@ -1,1 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.xw.lock.config.DistributedLockInitConfig
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.github.xw.lock.config.DistributedLockAutoConfig

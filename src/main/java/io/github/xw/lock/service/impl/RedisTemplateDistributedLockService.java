@@ -1,19 +1,21 @@
-package com.xw.lock.service.impl;
-
-import com.xw.lock.service.DistributedLockService;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.script.DefaultRedisScript;
+package io.github.xw.lock.service.impl;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.stereotype.Service;
+
+import io.github.xw.lock.service.DistributedLockService;
+
 /**
- * @author yangliu@tiduyun.com
- * @date 2023/9/26
+ * @author xw
  */
+@Service
 public class RedisTemplateDistributedLockService implements DistributedLockService {
 
-    private StringRedisTemplate redisTemplate;
+    private final StringRedisTemplate redisTemplate;
 
     public RedisTemplateDistributedLockService(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
@@ -27,7 +29,7 @@ public class RedisTemplateDistributedLockService implements DistributedLockServi
     }
 
     public Boolean releaseLock(String key, String value) {
-        Integer result = redisTemplate.execute(new DefaultRedisScript<Integer>(RELEASE_SCRIPT, Integer.class),
+        Long result = redisTemplate.execute(new DefaultRedisScript<Long>(RELEASE_SCRIPT, Long.class),
             Arrays.asList(key), value);
         return result == 1;
     }

@@ -1,9 +1,15 @@
-package com.xw.lock.annotation;
+package io.github.xw.lock.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * @author yangliu@tiduyun.com
- * @date 2023/9/26
+ * @author xw
  */
+@Target({ElementType.METHOD, ElementType.TYPE})
+@Retention(RetentionPolicy.RUNTIME)
 public @interface DistributedLock {
 
 
